@@ -1,0 +1,13 @@
+.removeButton {
+  display: inline-block;
+  background: red;
+  margin: 10px;
+}
+
+.taskList li {
+  list-style: none;
+}
+
+.taskList li.done {
+  text-decoration: line-through;
+}

@@ -1,0 +1,62 @@
+input.focus();
+
+function addNewTask() {
+  const inputValue = getInputValue();
+
+  if (!isValidInput(inputValue)) {
+    alert("Please enter a valid task!");
+    clearInput();
+    return;
+  }
+
+  const newTask = createTaskElement(inputValue);
+  appendTask(newTask);
+  clearInputAndFocus();
+}
+
+function getInputValue() {
+  return input.value.trim();
+}
+
+function isValidInput(value) {
+  return value !== "";
+}
+
+function createTaskElement(text) {
+  const newTask = document.createElement("li");
+  const deleteButton = document.createElement("button");
+
+  newTask.innerText = text;
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("removeButton");
+
+  newTask.appendChild(deleteButton);
+  setupTaskEvents(newTask, deleteButton);
+
+  return newTask;
+}
+
+function setupTaskEvents(taskElement, deleteButton) {
+  taskElement.addEventListener("click", () => {
+    taskElement.classList.toggle("done");
+  });
+
+  deleteButton.addEventListener("click", () => {
+    taskList.removeChild(taskElement);
+  });
+}
+
+function appendTask(taskElement) {
+  taskList.appendChild(taskElement);
+}
+
+function clearInput() {
+  input.value = "";
+}
+
+function clearInputAndFocus() {
+  clearInput();
+  input.focus();
+}
+
+addButton.addEventListener("click", addNewTask);
